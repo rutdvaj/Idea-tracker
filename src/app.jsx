@@ -3,6 +3,7 @@ import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { UserProvider, useUser } from "./Components/user";
 import { IdeasProvider } from "./Components/ideas";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const isLogInPage = window.location.pathname === "/login";
@@ -12,8 +13,13 @@ function App() {
       <div>
         <UserProvider>
           <IdeasProvider>
-            <Navbar />
-            <main>{isLogInPage ? <Login /> : <Home />}</main>
+            <BrowserRouter>
+              <Navbar />
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<Home />} />
+              </Routes>
+            </BrowserRouter>
           </IdeasProvider>
         </UserProvider>
       </div>
